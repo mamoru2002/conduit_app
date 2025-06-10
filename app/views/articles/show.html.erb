@@ -1,0 +1,32 @@
+<div class="article-page">
+  <div class="banner">
+    <div class="container">
+      <h1><%= @article.title %></h1>
+
+      <div class="article-meta">
+        <div class="info">
+          <a href="#" class="author">投稿者未設定</a>
+        </div>
+        <%= link_to edit_article_path(@article), class: 'btn btn-sm btn-outline-secondary' do %>
+          <i class="ion-edit"></i> Edit Article
+        <% end %>
+        <%= link_to article_path(@article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' do %>
+          <i class="ion-trash-a"></i> Delete Article
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container page">
+    <div class="row article-content">
+      <div class="col-md-12">
+        <p><%= @article.body %></p>
+        <ul class="tag-list">
+          <% @article.tag_list.to_s.split(',').each do |tag| %>
+            <li class="tag-default tag-pill tag-outline"><%= tag.strip %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
