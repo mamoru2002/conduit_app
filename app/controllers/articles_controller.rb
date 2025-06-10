@@ -42,7 +42,20 @@ class ArticlesController < ApplicationController
 
   private
 
-  def article_params
-    params.require(:article).permit(:title, :description, :body, :tag_list, :slug)
-  end
+    def set_article
+      @article = Article.find_by!(slug: params[:slug])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path, alert: "指定された記事が見つかりませんでした。"
+    end
+
+    def correct_user
+      @article = Article.find_by(slug: params[:slug])
+      unless logged_in? && current_user == @article.user
+        redirect_to root_path, alert: "権限がありません。"
+      end
+    end
+
+    def article_params
+      params.require(:article).permit(:title, :description, :body, :tag_list, :slug)
+    end
 end
