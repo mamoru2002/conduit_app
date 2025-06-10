@@ -22,13 +22,13 @@ class ArticlesController < ApplicationController
   end
 
     def update
-    @article = Article.find_by(slug: params[:slug])
-    if @article.update(article_params)
-      redirect_to article_by_slug_path(@article.slug)
-    else
-      render :edit
+      @article = Article.find_by(slug: params[:slug])
+      if @article.update(article_params)
+        redirect_to article_by_slug_path(@article.slug)
+      else
+        render :edit
+      end
     end
-  end
 
   def edit
     @article = Article.find_by(slug: params[:slug])
