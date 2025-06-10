@@ -1,0 +1,17 @@
+<% if flash[:alert] %>
+  <ul class="error-messages">
+    <li><%= flash[:alert] %></li>
+  </ul>
+<% elsif flash[:notice] %>
+  <ul class="success-messages">
+    <li><%= flash[:notice] %></li>
+  </ul>
+<% end %>
+
+<% if defined?(object) && object.errors.any? %>
+  <ul class="error-messages">
+    <% object.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>

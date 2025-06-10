@@ -1,2 +1,23 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<div class="auth-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">Sign in</h1>
+        <p class="text-xs-center">
+          <a href="<%= signup_path %>">Need an account?</a> <%# signup_path ヘルパーを使う %>
+        </p>
+
+        <%= render 'shared/error_messages' %>
+
+        <%= form_with url: login_path, scope: :session, local: true do |form| %>    
+          <fieldset class="form-group">
+            <%= form.email_field :email, class: "form-control form-control-lg", placeholder: "Email" %>
+          </fieldset>
+          <fieldset class="form-group">
+            <%= form.password_field :password, class: "form-control form-control-lg", placeholder: "Password" %>
+          </fieldset>
+          <%= form.submit "Sign in", class: "btn btn-lg btn-primary pull-xs-right" %>
+        <% end %>
+      </div>
+    </div>
+  </div>

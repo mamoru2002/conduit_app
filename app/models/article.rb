@@ -1,5 +1,6 @@
 class Article < ApplicationRecord
   before_validation :generate_slug
+  belongs_to :user
 
   validates :slug, presence: true, uniqueness: true
 

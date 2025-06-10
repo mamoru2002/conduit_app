@@ -24,10 +24,10 @@
         <div class="article-preview">
             <div class="article-meta">
                 <div class="info">
-                    <span class="author">投稿者名未設定</span>
+                    <a href="#" class="author"><%= article.user.username if article.user %></a>
                 </div>
             </div>
-            <%= link_to article_by_slug_path(article.slug), class: "preview-link" do %>
+            <%= link_to article_path(article), class: "preview-link" do %>
             <h1><%= article.title %></h1>
             <p><%= article.description.presence || "No description available." %></p>
             <span>Read more...</span>
@@ -37,14 +37,8 @@
 
           <%= link_to 'Create', new_article_path, class: "btn btn-lg pull-xs-right btn-primary" %>
 
-        <ul class="pagination">
-          <li class="page-item active">
-            <a class="page-link" href="">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="">2</a>
-          </li>
-        </ul>
+          <%= paginate @articles %>
+
       </div>
 
       <div class="col-md-3">

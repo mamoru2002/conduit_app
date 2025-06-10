@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
     root "articles#index"
-    get "/article/:slug", to: "articles#show", as: "article_by_slug"
-    get "/login", to: "sessions#new"
-    get "/signup", to: "users#new"
+
+    resources :users, only: [ :create ]
+
+    get "/login", to: "sessions#new", as: "login"
+    post "/login", to: "sessions#create"
+    delete "/logout", to: "sessions#destroy"
+
+    get "/signup", to: "users#new", as: "signup"
+
     resources :articles, param: :slug
 end
