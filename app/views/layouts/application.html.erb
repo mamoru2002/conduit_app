@@ -27,21 +27,17 @@
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
 
-          <% if logged_in? %> <%# ログインしている場合のみ表示 %>
+          <% if logged_in? %>
             <li class="nav-item">
               <%= link_to "New Article", new_article_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%# プロフィールへのリンク（オプション） %>
               <%= link_to current_user.username, '#', class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%# ログアウトリンク。method: :delete で SessionsController#destroy を呼び出す %>
               <%= link_to "Logout", logout_path, data: { "turbo-method": :delete }, class: "nav-link" %>
-              <%# Rails 6以前の場合: %>
-              <%# <%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %>
             </li>
-          <% else %> <%# ログインしていない場合のみ表示 %>
+          <% else %>
             <li class="nav-item">
               <%= link_to "Sign in", login_path, class: "nav-link" %>
             </li>
