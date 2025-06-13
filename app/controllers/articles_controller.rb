@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :set_article,     only: %i[show edit update destroy]
   before_action :correct_user, only: [ :edit, :update, :destroy ]
   def index
     @articles = Article.all.order(created_at: :desc).page(params[:page]).per(5)
@@ -18,11 +19,9 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find_by(slug: params[:slug])
   end
 
   def update
-    @article = Article.find_by(slug: params[:slug])
     if @article.update(article_params)
       redirect_to article_by_slug_path(@article.slug)
     else
@@ -31,11 +30,9 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find_by(slug: params[:slug])
   end
 
   def destroy
-    @article = Article.find_by(slug: params[:slug])
     @article.destroy
     redirect_to articles_path
   end
@@ -49,7 +46,6 @@ class ArticlesController < ApplicationController
     end
 
     def correct_user
-      @article = Article.find_by(slug: params[:slug])
       unless logged_in? && current_user == @article.user
         redirect_to root_path, alert: "権限がありません。"
       end
